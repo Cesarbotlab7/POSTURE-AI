@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const pdfParse = require("pdf-parse/lib/pdf-parse.js");
+const pdfParse = require("pdf-parse/dist/pdf-parse/cjs/index.cjs");
 
 // 只有 ADMIN_EMAIL 才能操作
 function isAdmin(email: string | undefined) {
