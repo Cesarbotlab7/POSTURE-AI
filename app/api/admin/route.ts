@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const pdfParse = require("pdf-parse/dist/pdf-parse/cjs/index.cjs");
-
 // 只有 ADMIN_EMAIL 才能操作
 function isAdmin(email: string | undefined) {
   return email && email === process.env.ADMIN_EMAIL;
@@ -33,6 +30,7 @@ export async function POST(request: NextRequest) {
 
   if (ext === "pdf") {
     const buffer = Buffer.from(await file.arrayBuffer());
+    const { default: pdfParse } = await import("pdf-parse/node");
     const parsed = await pdfParse(buffer);
     content = parsed.text.trim();
   } else if (ext === "txt" || ext === "md") {
