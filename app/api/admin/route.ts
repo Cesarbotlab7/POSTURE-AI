@@ -30,7 +30,8 @@ export async function POST(request: NextRequest) {
 
   if (ext === "pdf") {
     const buffer = Buffer.from(await file.arrayBuffer());
-    const { default: pdfParse } = await import("pdf-parse/node");
+    const pdfParseModule = await import("pdf-parse");
+    const pdfParse = (pdfParseModule as unknown as { default: (buf: Buffer) => Promise<{ text: string }> }).default;
     const parsed = await pdfParse(buffer);
     content = parsed.text.trim();
   } else if (ext === "txt" || ext === "md") {
