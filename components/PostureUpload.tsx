@@ -51,22 +51,22 @@ async function blurFacesInImage(
   const ctx = canvas.getContext("2d")!;
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-  // 检测人脸（在压缩后的 canvas 上检测）
+  // 检测人脸（在原始 img 上检测，精度更高）
   const detections = await faceapi.detectAllFaces(
-    canvas,
-    new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.45 })
+    img,
+    new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.3 })
   );
 
-  // 对每张脸打马赛克
+  // 对每张脸打马赛克（坐标需按压缩比例换算到 canvas）
   for (const det of detections) {
     const { x, y, width, height } = det.box;
 
-    // 扩大打码区域 30%，覆盖头部边缘
+    // 扩大打码区域 30%，覆盖头部边缘（坐标按 scale 换算到 canvas）
     const pad  = 0.3;
-    const rx   = Math.max(0, Math.round(x - width  * pad));
-    const ry   = Math.max(0, Math.round(y - height * pad * 1.5)); // 头顶多留点
-    const rw   = Math.min(canvas.width  - rx, Math.round(width  * (1 + pad * 2)));
-    const rh   = Math.min(canvas.height - ry, Math.round(height * (1 + pad * 2.5)));
+    const rx   = Math.max(0, Math.round((x - width  * pad) * scale));
+    const ry   = Math.max(0, Math.round((y - height * pad * 1.5) * scale));
+    const rw   = Math.min(canvas.width  - rx, Math.round(width  * (1 + pad * 2) * scale));
+    const rh   = Math.min(canvas.height - ry, Math.round(height * (1 + pad * 2.5) * scale));
 
     // 像素块大小：按脸宽动态计算，越大越模糊
     const pixelSize = Math.max(10, Math.round(width / 10));
