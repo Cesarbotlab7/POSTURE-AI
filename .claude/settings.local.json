@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find C:UsersCesar/Desktop/MY-projects/posture-ai/node_modules/next -name *.md -maxdepth 2)",
+      "Bash(npm install:*)",
+      "Bash(grep -r publishable C:UsersCesar/Desktop/MY-projects/posture-ai/node_modules/@supabase/ --include=*.js -l)",
+      "Bash(curl -L -o \"tiny_face_detector_model-weights_manifest.json\" \"https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights/tiny_face_detector_model-weights_manifest.json\")",
+      "Bash(curl -L -o \"tiny_face_detector_model-shard1\" \"https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights/tiny_face_detector_model-shard1\")",
+      "WebSearch",
+      "Bash(robocopy \"C:\\\\Users\\\\Cesar\\\\Desktop\\\\MY-projects\\\\posture-ai\" \"D:\\\\posture-ai\" /E /XD node_modules .next .git /NFL /NDL /NJH /NJS)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(cmd /c \"robocopy \"\"C:\\\\Users\\\\Cesar\\\\Desktop\\\\MY-projects\\\\posture-ai\"\" \"\"D:\\\\posture-ai\"\" /E /XD node_modules .next .git /NFL /NDL /NJH /NJS\")",
+      "Bash(powershell -Command \":*)",
+      "Bash(handle64.exe \"C:\\\\Users\\\\Cesar\\\\Desktop\\\\MY-projects\\\\posture-ai\")",
+      "Bash(handle.exe \"C:\\\\Users\\\\Cesar\\\\Desktop\\\\MY-projects\\\\posture-ai\")",
+      "Bash(powershell -Command \"Get-Process | Where-Object { $_.MainWindowTitle -like ''*posture*'' -or $_.Path -like ''*posture*'' } | Select-Object Name, Id, Path\")"
+    ]
+  }
+}
